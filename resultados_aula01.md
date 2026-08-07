@@ -22,3 +22,8 @@ Mensagem Recebida: 'curso machine learning'
 Classificação do Modelo: SPAM
 Ação do Bot: 🚫 [BLOQUEADO] Mensagem descartada por conteúdo suspeito.
 ==================================================
+
+-------------------------------------------------------------------------------
+
+Frase do Usuário: Houve um erro no meu boleto
+Intenção Identificada: financeiro
