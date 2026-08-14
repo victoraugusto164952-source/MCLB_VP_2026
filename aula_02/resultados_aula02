@@ -1,0 +1,37 @@
+--- RESULTADOS DO LAB 01 ---
+Mensagem: 'Quero consultar quanto dinheiro tenho' ==> Intenção Predita: [fazer_pix]
+Mensagem: 'Pode me ajudar a fazer um pix?' ==> Intenção Predita: [fazer_pix]
+Mensagem: 'Gostaria de cancelar meu cartão de crédito' ==> Intenção Predita: [cancelar_conta]
+
+# 1 - Resposta
+1 teve um resultado incorreto, na primeira mensagem, ele interpretou como "fazer pix" mas o correto seria "consultar saldo"
+# 2 - Resposta 
+2 - Pegar a frase incorreta e coloca la na lista de dados para treinamento e apontar o resultado correto.
+# 3 -  Resposta
+3 - é um algoritmo de aprendizado de máquina supervisionado utilizado principalmente para problemas de classificação 
+(diferente do que o nome "regressão" sugere).A principal função da LogisticRegression é prever a categoria/classe a qual um dado pertence,
+calculando a probabilidade dessa ocorrência.
+
+Classificação Binária: Escolha entre duas opções (ex: Spam ou Não Spam, Aprovado ou Reprovado).
+
+Classificação Multiclasse: Escolha entre três ou mais opções (como no código da sua tela, onde o modelo classifica intenções entre 'consultar_saldo', 'fazer_pix' e 'cancelar_conta').
+
+
+--- RESULTADOS DO LAB 02 ---
+Mensagem de Teste: 'Gostaria de devolver o produto que comprei'
+Intenção Predita: troca_devolucao
+
+--- Distribuição de Probabilidades por Classe ---
+Classe [duvida_frete]: 27.99%
+Classe [rastrear_pedido]: 24.54%
+Classe [troca_devolucao]: 47.46%
+
+# 1 - Resposta
+1 - A resposta está correta
+# 2 - Resposta
+2 - Não foi detectado erro na frase
+# 3 - Resposta
+3 - é um algoritmo de aprendizado de máquina supervisionado baseado no Teorema de Bayes.
+A função principal do Naive Bayes é calcular a probabilidade condicional de um dado pertencente a uma determinada classe,
+considerando as características (palavras/vetores) apresentadas na entrada.
+
