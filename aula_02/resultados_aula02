@@ -105,3 +105,84 @@ Ele monta possibilidades muito especificas a medida que a profundidade vai fican
 
 #========== FIM ==============
 
+
+# ================================================================================
+# LAB 04 - AULA 02 (MLCB): DESAFIO NLU PARA AGÊNCIA DE VIAGENS (DO ZERO)
+# ================================================================================
+
+# [PROPOSTA]
+# Você foi contratado para criar o protótipo do motor de Natural Language Understanding (NLU)
+# de um Chatbot para uma Agência de Viagens.
+
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+
+# [REQUISITOS OBRIGATÓRIOS]
+# 1. Criar um dataset próprio em um DataFrame Pandas com no mínimo 12 frases distribuídas em
+#    pelo menos 3 intenções distintas (ex: 'comprar_passagem', 'cancelar_reserva', 'falar_atendente').
+
+dados_viagem = {
+    "mensagem": [
+        "Quanto custa uma passagem?", "Uma passagem para o Brasil.", "Quais passagens vocês tem?",
+        "Quero cancelar minha reserva.", "Quero um reembolso.", "Não consigo alterar minha viagem",
+        "Falar com um atendente por favor", "Preciso de ajuda urgente", "Posso falar com um humano?",
+        "Reservar um voo para Paris", "Verificar disponibilidade para Roma", "Comprar passagens para Nova Iorque"
+    ],
+    "intencao":[
+        "comprar_passagem", "comprar_passagem", "comprar_passagem",
+        "cancelar_reserva", "cancelar_reserva", "cancelar_reserva",
+        "falar_atendente", "falar_atendente", "falar_atendente",
+        "comprar_passagem", "comprar_passagem", "comprar_passagem"
+    ]
+}
+
+dtf1 = pd.DataFrame(dados_viagem)
+
+X = dtf1["mensagem"]
+y = dtf1['intencao']
+
+# 2. Realizar a divisão em conjuntos de Treino e Teste usando `train_test_split`.
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size= 0.3, random_state=42)
+
+# 3. Escolher um vetorizador de texto (CountVectorizer ou TfidfVectorizer).
+
+vectorizer = CountVectorizer()
+X_train_vec = vectorizer.fit_transform(X_train)
+X_test_vec = vectorizer.transform(X_test)
+
+# 4. Escolher um algoritmo de classificação (LogisticRegression, MultinomialNB ou DecisionTreeClassifier).
+
+alnb = MultinomialNB()
+alnb.fit(X_train_vec, y_train)
+
+# 5. Treinar o modelo e realizar predições com no mínimo 3 frases INÉDITAS (que não estavam no treino).
+novas_frases = [
+    "Preciso de uma informação.",
+    "Não quero mais essa reserva",
+    "3 passagens para Alemanha por favor"
+]
+
+novas_frases_vec = vectorizer.transform(novas_frases)
+predicao = alnb.predict(novas_frases_vec)
+
+# 6. Exibir as intenções previstas no console.
+
+print ('--- RESULTADOS DO LAB 04 ---')
+
+for frase, intencao in zip(novas_frases, predicao):
+  print(f"Mensagem:'{frase}' ===> intenção predita:'{intencao}'")
+
+
+--- RESULTADOS DO LAB 04 ---
+Mensagem:'Preciso de uma informação.' ===> intenção predita:'falar_atendente'
+Mensagem:'Não quero mais essa reserva' ===> intenção predita:'cancelar_reserva'
+Mensagem:'3 passagens para Alemanha por favor' ===> intenção predita:'comprar_passagem'
+
+
+# [ENTREGA]
+# Construa o código em um notebook (.ipynb), execute, salve no repositório e registre os resultados
+# e a justificativa técnica no arquivo 'resultados_aula02.md'.
+# ================================================================================
