@@ -182,6 +182,15 @@ Mensagem:'Não quero mais essa reserva' ===> intenção predita:'cancelar_reserv
 Mensagem:'3 passagens para Alemanha por favor' ===> intenção predita:'comprar_passagem'
 
 
+# JUSTIFICATIVA TÉCNICA
+
+===> foram utilizados as seguintes ferramentas:
+
+pandas, sklearn, CountVectorizer, train_test_split e MultinomialNB.
+
+consegui estruturar o código com muita revisão dos códigos de outras atividades, tive que pesquisar a documentação de outras ferramentas para saber como
+aplica-las no código, tive ajuda de IA mas bem pouco, mais para me explicar erros lógicos do código.
+
 # [ENTREGA]
 # Construa o código em um notebook (.ipynb), execute, salve no repositório e registre os resultados
 # e a justificativa técnica no arquivo 'resultados_aula02.md'.
