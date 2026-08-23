@@ -1,3 +1,7 @@
+# ============================================================
+#                 RESULTADOS LAB 01 - AULA 03 
+# ============================================================
+
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
