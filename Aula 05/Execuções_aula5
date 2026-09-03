@@ -1,0 +1,66 @@
+EXERCÍCIO 1
+
+import re
+import nltk
+from nltk.corpus import stopwords
+import spacy
+
+# Ensure NLTK stopwords are downloaded
+nltk.download('stopwords', quiet=True)
+stop_words_pt = set(stopwords.words('portuguese'))
+
+nlp = None # Initialize nlp to None
+# Carregar o modelo morfológico do Spacy em Português
+try:
+    nlp = spacy.load("pt_core_news_sm")
+    print("Modelo spaCy 'pt_core_news_sm' carregado com sucesso.")
+except OSError:
+    print("Erro: O modelo spaCy 'pt_core_news_sm' não foi encontrado.")
+    print("Por favor, execute a célula anterior (instalação do modelo) ou, se já o fez,")
+    print("pode ser necessário REINICIAR O AMBIENTE DE EXECUÇÃO (Ambiente de execução -> Reiniciar ambiente de execução...)")
+    print("e então executar esta célula novamente.")
+
+def limpar_e_lemmatizar(texto):
+    """
+    Função para tratar texto bruto:
+    1. Converte para minúsculas
+    2. Remove caracteres especiais, pontuações e números via Regex
+    3. Remove Stop Words e realiza Lemmatization via Spacy
+    """
+    if nlp is None:
+        return "Erro: Modelo spaCy não carregado. Não foi possível processar o texto."
+
+    # TODO 1: Converter para minúsculas
+    texto_limpo = texto.lower()
+
+    # TODO 2: Remover tudo que não for letra ou espaço usando re.sub
+    # Mantém letras de 'a' a 'z' e caracteres acentuados comuns do português
+    texto_limpo = re.sub(r'[^a-záàâãéèêíïóôõöúçñ\s]', '', texto_limpo)
+
+    # Processamento com Spacy
+    doc = nlp(texto_limpo)
+
+    # TODO 3: Extrair o lema (token.lemma_) ignorando stop words e espaços vazios
+    tokens_filtrados = [
+        token.lemma_
+        for token in doc
+        if token.text not in stop_words_pt  # Filtra stop words do NLTK
+        and not token.is_stop              # Filtra stop words do próprio spaCy (opcional, mas recomendado)
+        and not token.is_space             # Remove espaços extras
+        and len(token.text) > 1            # Remove letras isoladas que perderam o sentido
+    ]
+
+    return " ".join(tokens_filtrados)
+
+# === TESTE DO EXERCÍCIO 1 ===
+frase_teste = "Gostaria de saber se vocês estão DEVOLVENDO os valores das mesas compradas!!!"
+print("Frase Original:", frase_teste)
+print("Frase Limpa & Lemmatizada:", limpar_e_lemmatizar(frase_teste))
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+EXERCÍCIO 2
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
