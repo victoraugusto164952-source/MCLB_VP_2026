@@ -105,3 +105,71 @@ print("Formato da Matriz de Vetores Densos (Exemplos, Dimensões):", X_vetores.s
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+import numpy as np
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+
+# 1. Carregar dados e matriz de vetores
+# (Exemplo ilustrativo de como os dados 'y' se relacionam com o dataframe)
+df = pd.read_csv("sac_moveis_ac2.csv")
+y = df['intencao']  # Assumindo que a coluna com as classes chame-se 'intencao'
+
+# Assumindo a matriz X_vetores gerada no Exercício 2
+# Treinar o modelo de Regressão Logística
+modelo_regressao = LogisticRegression(max_iter=1000)
+modelo_regressao.fit(X_vetores, y)
+
+def classificar_com_fallback_linear(mensagem_usuario, modelo, model_emb, limiar=0.50):
+    """
+    Classifica a intenção e verifica se a probabilidade atinge o limiar mínimo de confiança.
+    """
+    # 1. Obter o vetor denso da mensagem do usuário
+    vetor_msg = obter_vetor_frase(mensagem_usuario, model_emb).reshape(1, -1)
+    
+    # TODO 1: Obter as probabilidades para cada classe usando predict_proba
+    # predict_proba retorna uma matriz [[prob_classe1, prob_classe2, ...]]. Pegamos a primeira linha.
+    probabilidades = modelo.predict_proba(vetor_msg)[0]
+    
+    # TODO 2: Obter a maior probabilidade e o índice correspondente
+    max_prob = np.max(probabilidades)
+    idx_classe = np.argmax(probabilidades)
+    intencao_prevista = modelo.classes_[idx_classe]
+    
+    # TODO 3: Aplicar a regra de Fallback
+    if max_prob < limiar:
+        return "FALLBACK_HUMANO", max_prob
+    else:
+        return intencao_prevista, max_prob
+
+# === TESTE DO EXERCÍCIO 3 ===
+testes = [
+    "Quero saber o valor do frete do sofá",             # Intenção esperada: vendas_orcamento
+    "Gostaria de ver receitas de bolo de cenoura"       # Frase fora do domínio -> Deve acionar Fallback
+]
+
+for t in testes:
+    intencao, conf = classificar_com_fallback_linear(t, modelo_regressao, fasttext_model)
+    print(f"Frase: '{t}' | Resultado: {intencao} | Confiança: {conf:.2%}")
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+
+# TODO 1: Instanciar e treinar o KNN com n_neighbors=3
+modelo_knn = KNeighborsClassifier(n_neighbors=3)
+modelo_knn.fit(X_vetores, y)
+
+# Predições nas duas abordagens
+y_pred_linear = modelo_regressao.predict(X_vetores)
+y_pred_knn = modelo_knn.predict(X_vetores)
+
+# TODO 2: Calcular a acurácia de cada modelo
+acuracia_linear = accuracy_score(y, y_pred_linear)
+acuracia_knn = accuracy_score(y, y_pred_knn)
+
+print(f" Acurácia - Regressão Logística (Linear): {acuracia_linear:.2%}")
+print(f" Acurácia - KNN (Distância K=3): {acuracia_knn:.2%}")
