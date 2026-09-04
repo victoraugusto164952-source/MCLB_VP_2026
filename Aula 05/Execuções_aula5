@@ -61,6 +61,47 @@ print("Frase Limpa & Lemmatizada:", limpar_e_lemmatizar(frase_teste))
 
 EXERCÍCIO 2
 
+import numpy as np
+import pandas as pd
+import gensim.downloader as api
+
+print("Carregando modelo de Embeddings FastText (Gensim)...")
+# Utilizando o modelo pré-treinado do Gensim em português ou substituto equivalente
+fasttext_model = api.load("glove-wiki-gigaword-50") # Exemplo leve de 50 dimensões para testes em aula
+
+def obter_vetor_frase(frase, model):
+    """
+    Calcula a média dos vetores das palavras de uma frase (Mean Pooling).
+    """
+    # Garante que tratamos strings vazias ou nulas que possam vir do DataFrame
+    if pd.isna(frase) or not isinstance(frase, str):
+        return np.zeros(model.vector_size)
+        
+    palavras = frase.split()
+    vetores = []
+    
+    for palavra in palavras:
+        if palavra in model:
+            # TODO 1: Adicionar o vetor da palavra na lista de vetores
+            vetores.append(model[palavra])
+            
+    if len(vetores) == 0:
+        # Se nenhuma palavra estiver no vocabulário, retorna vetor de zeros
+        return np.zeros(model.vector_size)
+    
+    # TODO 2: Retornar a média ao longo do eixo 0 (np.mean)
+    vetor_medio = np.mean(vetores, axis=0)
+    return vetor_medio
+
+# === TESTE DO EXERCÍCIO 2 ===
+# Certifique-se de que a coluna de mensagens passou pela função 'limpar_e_lemmatizar' do Ex 1 antes!
+df = pd.read_csv("sac_moveis_ac2.csv")
+
+# Uma boa prática é preencher valores nulos antes de vetorizar
+df['mensagem'] = df['mensagem'].fillna("")
+
+X_vetores = np.array([obter_vetor_frase(msg, fasttext_model) for msg in df['mensagem']])
+print("Formato da Matriz de Vetores Densos (Exemplos, Dimensões):", X_vetores.shape)
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
