@@ -1,11 +1,11 @@
-testes
+  TESTES
 
 Teste 1 — Compra de imóvel
 Frase inserida:
 Quero comprar um apartamento de 3 quartos.
 Resultado obtido:
 Intenção: comprar_imovel
-Confiança: 100.0%
+Confiança: 89.0%
 Status da Decisão: IDENTIFICADO (comprar_imovel)
 Resposta Automática do SAC:
 **Atendimento de Vendas:** Ficamos felizes com seu interesse! Você pode conferir nosso catálogo de imóveis à venda em nosso site www.imobiliaria.com/vendas ou aguardar que um de nossos corretores entrará em contato em instantes.
@@ -17,7 +17,7 @@ Frase inserida:
 Preciso alugar uma casa perto da faculdade.
 Resultado obtido:
 Intenção: alugar_imovel
-Confiança: 100.0%
+Confiança: 65.1%
 Status da Decisão: Atendimento de Locação.
 Resposta Automática do SAC:
 **Atendimento de Locação:** Temos ótimas opções disponíveis! Acesse www.imobiliaria.com/aluguel para filtrar por região e valor. Para agendar uma visita, envie o código do imóvel por aqui.
@@ -27,7 +27,7 @@ Frase inserida:
 O chuveiro do apartamento queimou e preciso de conserto.
 Resultado obtido:
 Intenção: suporte_manutencao
-Confiança: 100.0%
+Confiança: 39.1%
 Status da Decisão: IDENTIFICADO (suporte_manutencao)
 Resposta Automática do SAC:
 **Suporte e Manutenção:** Sentimos muito pelo inconveniente. Por favor, abra um chamado urgente em nosso portal do inquilino (www.imobiliaria.com/manutencao) anexando fotos ou vídeos do problema para acionarmos nossos prestadores.
@@ -37,7 +37,7 @@ Frase inserida:
 Preciso da segunda via do boleto do aluguel.
 Resultado obtido:
 Intenção: 2via_boleto_contrato
-Confiança: 100.0%
+Confiança: 55.4%
 Status da Decisão:IDENTIFICADO (2via_boleto_contrato)
 Resposta Automática do SAC:
 **Financeiro e Contratos:** Para acessar boletos ou documentos, acesse a Área do Cliente em www.imobiliaria.com/cliente informando seu CPF e senha. Lá você baixa a 2ª via atualizada em segundos.
