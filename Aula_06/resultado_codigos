@@ -235,3 +235,28 @@ with gr.Blocks(theme=gr.themes.Soft(), title="SAC Imobiliário") as app:
 # Executar a aplicação
 app.launch(debug=True, share=True)
 #FIM DO CÓDIGO
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+LAB04 
+
+foi alterado 
+# Intenção: cancelar_contrato
+("Quero cancelar meu contrato de aluguel", "cancelar_contrato"),
+("Como faço para cancelar o contrato do imóvel?", "cancelar_contrato"),
+("Quero solicitar o distrato do meu contrato", "cancelar_contrato"),
+("Preciso encerrar meu contrato de aluguel", "cancelar_contrato"),
+("Quais são os procedimentos para cancelar o contrato?", "cancelar_contrato")
+
+
+"cancelar_contrato": (
+    "**Cancelamento de Contrato:** Para solicitar o cancelamento ou distrato, "
+    "acesse a Área do Cliente em www.imobiliaria.com/cliente e envie sua solicitação. "
+    "Nossa equipe de contratos analisará o pedido e informará os próximos passos."
+)
+
+
+gr.Examples(
+                examples=[
+["Quero cancelar meu contrato de aluguel."],
