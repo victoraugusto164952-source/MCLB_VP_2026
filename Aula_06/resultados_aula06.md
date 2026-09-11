@@ -1,10 +1,8 @@
+testes
 Teste 1 — Compra de imóvel
 Frase inserida:
-
 Quero comprar um apartamento de 3 quartos.
-
 Resultado obtido:
-
 Intenção: comprar_imovel
 Confiança: 100.0%
 Status da Decisão: IDENTIFICADO (comprar_imovel)
@@ -15,11 +13,8 @@ Resposta Automática do SAC:
 
 Teste 2 — Aluguel de imóvel
 Frase inserida:
-
 Preciso alugar uma casa perto da faculdade.
-
 Resultado obtido:
-
 Intenção: alugar_imovel
 Confiança: 100.0%
 Status da Decisão: Atendimento de Locação.
@@ -28,11 +23,8 @@ Resposta Automática do SAC:
 
 Teste 3 — Manutenção
 Frase inserida:
-
 O chuveiro do apartamento queimou e preciso de conserto.
-
 Resultado obtido:
-
 Intenção: suporte_manutencao
 Confiança: 100.0%
 Status da Decisão: IDENTIFICADO (suporte_manutencao)
@@ -41,11 +33,8 @@ Resposta Automática do SAC:
 
 Teste 4 — Boleto
 Frase inserida:
-
 Preciso da segunda via do boleto do aluguel.
-
 Resultado obtido:
-
 Intenção: 2via_boleto_contrato
 Confiança: 100.0%
 Status da Decisão:IDENTIFICADO (2via_boleto_contrato)
@@ -55,5 +44,7 @@ Resposta Automática do SAC:
 
 
 ----------------------------------------------------------------------------------------------------------------
+lab01
+
 
 
