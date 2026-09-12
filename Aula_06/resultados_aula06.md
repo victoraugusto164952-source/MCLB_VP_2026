@@ -1,12 +1,18 @@
   TESTES CODIGO ORIGINAL
 
 Teste 1 — Compra de imóvel
+
 Frase inserida:
 Quero comprar um apartamento de 3 quartos.
+
 Resultado obtido:
+
 Intenção: comprar_imovel
+
 Confiança: 89.0%
+
 Status da Decisão: IDENTIFICADO (comprar_imovel)
+
 Resposta Automática do SAC:
 **Atendimento de Vendas:** Ficamos felizes com seu interesse! Você pode conferir nosso catálogo de imóveis à venda em nosso site www.imobiliaria.com/vendas ou aguardar que um de nossos corretores entrará em contato em instantes.
 
