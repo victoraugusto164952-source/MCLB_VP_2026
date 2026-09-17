@@ -1,0 +1,33 @@
+--------------------------------------------------------------------------------
+EXERCÍCIO 01: Pré-processamento — Stopwords e Lematização 
+--------------------------------------------------------------------------------
+
+
+tokens = ["os", "produtos", "comprados", "não", "chegaram"]
+stopwords = ["os", "não"]
+
+# TODO: Crie uma lista vazia chamada tokens_limpos
+tokens_limpos = []
+
+# TODO: Percorra cada palavra da lista 'tokens' usando um laço for
+for palavra in tokens:
+    # - Se a palavra estiver em 'stopwords', ignore-a.
+    if palavra in stopwords:
+        continue
+    # - Se a palavra for "comprados", adicione "comprar" na lista limpa.
+    elif palavra == "comprados":
+        tokens_limpos.append("comprar")
+    # - Se a palavra for "chegaram", adicione "chegar" na lista limpa.
+    elif palavra == "chegaram":
+        tokens_limpos.append("chegar")
+    # - Para as demais palavras, adicione-as sem alteração.
+    else:
+        tokens_limpos.append(palavra)
+
+# TODO: Imprima a lista tokens_limpos
+print(tokens_limpos)
+# Saída esperada: ['produtos', 'comprar', 'chegar']
+
+Responda: Qual a diferença entre Stemming e Lematização? Por que a Lematização garante que a palavra exista no dicionário e o Stemming não?
+
+
