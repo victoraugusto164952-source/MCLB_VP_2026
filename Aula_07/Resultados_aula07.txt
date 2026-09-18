@@ -6,30 +6,241 @@ EXERCÍCIO 01: Pré-processamento — Stopwords e Lematização
 tokens = ["os", "produtos", "comprados", "não", "chegaram"]
 stopwords = ["os", "não"]
 
-# TODO: Crie uma lista vazia chamada tokens_limpos
+
 tokens_limpos = []
 
-# TODO: Percorra cada palavra da lista 'tokens' usando um laço for
+
 for palavra in tokens:
-    # - Se a palavra estiver em 'stopwords', ignore-a.
+
     if palavra in stopwords:
         continue
-    # - Se a palavra for "comprados", adicione "comprar" na lista limpa.
+    
     elif palavra == "comprados":
         tokens_limpos.append("comprar")
-    # - Se a palavra for "chegaram", adicione "chegar" na lista limpa.
+        
     elif palavra == "chegaram":
         tokens_limpos.append("chegar")
-    # - Para as demais palavras, adicione-as sem alteração.
+        
     else:
         tokens_limpos.append(palavra)
 
-# TODO: Imprima a lista tokens_limpos
+
 print(tokens_limpos)
-# Saída esperada: ['produtos', 'comprar', 'chegar']
+Saída: ['produtos', 'comprar', 'chegar']
 
 Responda: Qual a diferença entre Stemming e Lematização? Por que a Lematização garante que a palavra exista no dicionário e o Stemming não?
+R:Stemming é o método que encurta a palavra de forma "resumida" para que ela tenha menos peso. Enquanto o lemming busca a origem da palavra, 
+chegando na palavra não conjugada.
 
-Stemming é o método que encurta a palavra de forma "resumida" para que ela tenha menos peso. Enquanto o lemming busca a origem da palavra, chegando na palavra não conjugada.
+
+--------------------------------------------------------------------------------
+EXERCÍCIO 02: Validação de NLU — Threshold e Fallback
+--------------------------------------------------------------------------------
 
 
+def validar_intencao(confianca):
+    
+    if confianca >= 0.70:
+        return "Ação Executada"
+    else:
+        return "Fallback Acionado"
+
+
+resultado = validar_intencao(0.55)
+print(resultado)
+Saída: Fallback Acionado
+
+Responda: O que aconteceria de errado no sistema de um banco se o limiar de confiança (Threshold) fosse configurado em apenas 20% (0.20)?
+R:Como ele não tem uma porcentaegem confiável qualquer resposta seria 'adequada', pois o limiar de confiança está baixo,
+e qualquer resposta seria considerada confiável.
+
+
+--------------------------------------------------------------------------------
+EXERCÍCIO 03: Ponderação de Palavras — Lógica TF-IDF
+--------------------------------------------------------------------------------
+
+
+def calcular_peso_tfidf(frequencia_geral):
+    
+    if frequencia_geral == "muito_frequente":
+        return 0.1
+    
+    elif frequencia_geral == "pouco_frequente":
+        return 0.9
+
+
+peso_vazamento = calcular_peso_tfidf("pouco_frequente")
+print(peso_vazamento)
+Saída: 0.9
+
+
+Responda: Qual a lógica conceitual do TF-IDF para atribuir peso baixo a palavras muito comuns e peso alto a palavras raras num banco de dados?
+R:o TF-IDF usa a lógica de quanto mais a palavra aparece no texto menos valor ela tem, agora quanto menos a palavra aparece,
+ela possui um peso semântico maior que seria a palavra que traz mais sentido a frase, intenção.
+
+
+--------------------------------------------------------------------------------
+EXERCÍCIO 04: Métricas de Avaliação — Calculando a Precisão
+--------------------------------------------------------------------------------
+
+
+vp = 80  # Verdadeiros Positivos
+fp = 20  # Falsos Positivos
+fn = 5   # Falsos Negativos
+
+
+precisao = vp / (vp + fp)
+
+
+print(f"{precisao * 100}%")
+R:Saída: 80.0%
+
+Responda: Em detecção de fraudes, o que representa um Falso Positivo e um Falso Negativo? Qual dos dois gera prejuízo financeiro direto à empresa?
+Falso Positivo é quando o algoritmo considera uma ação legítima em alarme falso. Agora o Falso Negativo é justamente o contrário, ele pega a ação que seria um alarme falso e a considera com legitima.
+O FN seria o que causa mais prejuizo, pois é um ataque direto a empresa que o algoritimo considera legitimo.
+
+
+--------------------------------------------------------------------------------
+EXERCÍCIO 05: Estruturação de NLU — Dicionário de Intenção e Entidades
+--------------------------------------------------------------------------------
+
+
+solicitacao = {
+    "intencao": "comprar_medicamento",
+    "produto": "analgésico",
+    "quantidade": 2
+}
+
+
+print(solicitacao)
+Saída: {'intencao': 'comprar_medicamento', 'produto': 'analgésico', 'quantidade': 2}
+
+Responda: Na arquitetura de NLU, qual a diferença conceitual entre Intenção (Intent) e Entidade (Slot)?
+R:Intenção seria o que o usuário deseja executar, enquanto Entidade seriam as palavras que indicam essa intenção. 
+Pela lógica as entidades estam dentro da intenção.
+
+
+--------------------------------------------------------------------------------
+EXERCÍCIO 06: Representação Vetorial — Proximidade em Word Embeddings
+--------------------------------------------------------------------------------
+
+
+def sao_sinonimos(distancia):
+    
+    if distancia < 0.20:
+        return True
+    
+    else:
+        return False
+
+
+resultado = sao_sinonimos(0.05)
+print(resultado)
+Saída: True
+
+
+Responda: Por que um modelo baseado puramente em TF-IDF não consegue entender sinônimos, enquanto o Word Embeddings consegue?
+R:O TF-IDF baseia-se na contagem exata de palavras e não reconhece sinônimos, tratando termos como "aluguel" e "locação" de forma independente. 
+Em contrapartida, os Word Embeddings fundamentam-se no contexto, mapeando sinônimos geometricamente próximos em um espaço vetorial por meio da análise
+de palavras vizinhas. 
+
+
+--------------------------------------------------------------------------------
+EXERCÍCIO 07: Limpeza de Texto — Tokenização, Pontuação e Stopwords
+--------------------------------------------------------------------------------
+
+
+bruta = ["O", "sistema", "está", "muito", "lento", "hoje", "!"]
+stopwords = ["O", "está"]
+
+
+tokens_limpos = []
+
+
+
+for palavra in bruta:
+    if palavra not in stopwords and palavra != "!":
+        tokens_limpos.append(palavra)
+
+
+print(tokens_limpos)
+Saída: ['sistema', 'muito', 'lento', 'hoje']
+
+
+Responda: O que são Stopwords e por que sua remoção é importante no pré-processamento?
+R:StopWords são aquelas palavras que na frase não tem um peso significativo para o contexto,
+as conjunções por exemplo, elas só agregam peso à frase, mas a sua remoção não altera o sentido ou a entenção da frase, otimizando 
+o algorítimo.
+
+
+--------------------------------------------------------------------------------
+EXERCÍCIO 08: Métricas de Avaliação — Calculando o Recall
+--------------------------------------------------------------------------------
+
+
+vp = 90  # Verdadeiros Positivos (casos graves detectados)
+fn = 10  # Falsos Negativos (casos graves ignorados)
+
+
+recall = vp / (vp + fn)
+
+
+print(f"{recall * 100}%")
+Saída: 90.0%
+
+
+Responda: O Recall foca em evitar Falsos Positivos ou Falsos Negativos? Por que ter um 
+Recall alto é vital na área de saúde ou segurança?
+R: Ele foca em evitar FN, e é vital que ele funcione nas áreas da saúde e segurança porquê são áreas onde o erro pode ser prejudicial da forma mais grave possível, então nessas áreas 
+o recomendade é utilizar o Recall para que as chances de FN sejam minimas.
+
+
+--------------------------------------------------------------------------------
+EXERCÍCIO 09: Processamento Rápido — Simulando um Stemmer
+--------------------------------------------------------------------------------
+
+
+palavras = ["correndo", "corredor", "correu"]
+
+
+radicais = []
+
+
+for palavra in palavras:
+    
+    if palavra.startswith("corr"):
+        radicais.append("corr")
+
+
+print(radicais)
+Saída: ['corr', 'corr', 'corr']
+
+
+Responda: O que caracteriza o Stemming em termos de processamento e por que ele é mais rápido do que a Lematização?
+R:A lematização foca na frase inteira para entender o contexto das palavras, já o stemming não precisa de contexto, ele simplesmente foca nas palavras individualizadas,
+aplica um processo que encurta a palavra e que não precisa ter "sentido", tornando o processo mais rápido e exigindo menos da CPU.
+
+
+--------------------------------------------------------------------------------
+EXERCÍCIO 10: Seleção de Intenção e Disparo de Fallback
+--------------------------------------------------------------------------------
+
+
+probabilidades = [0.25, 0.30, 0.15]
+limiar = 0.60
+
+
+maior_confianca = max(probabilidades)
+
+
+if maior_confianca >= limiar:
+    print("Intenção Confirmada")
+else:
+    print("Acionar Fallback")
+
+Saída: Acionar Fallback (pois 0.30 < 0.60)
+
+
+Responda: Diante de uma intenção ambígua que aciona o Fallback, qual mensagem o chatbot deve exibir ao usuário e qual o objetivo dessa resposta?
+R:O chat deve dizer que a pergunta não foi clara o suficiente, e que ele não foi capaz de entender a intenção do usuário e que ele será encaminhado para um humano atendelo melhor.
+o objetivo dessa mensagem está justamente no chat dizer que não ofi capaz de compreender a mensagem e principalmente encaminha-lo para um atendimento humano.
