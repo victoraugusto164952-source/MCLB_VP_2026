@@ -30,4 +30,6 @@ print(tokens_limpos)
 
 Responda: Qual a diferença entre Stemming e Lematização? Por que a Lematização garante que a palavra exista no dicionário e o Stemming não?
 
+Stemming é o método que encurta a palavra de forma "resumida" para que ela tenha menos peso. Enquanto o lemming busca a origem da palavra, chegando na palavra não conjugada.
+
 
